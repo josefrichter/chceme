@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @suggestion.title %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @suggestion.body %>
+</p>
+
+<p>
+	<%= form_for([@suggestion, @suggestion.votes.build]) do |f| %>
+		<%= f.error_messages %>
+		<%= f.hidden_field(:value,:value => 1) %>
+		<%= f.submit "Cast a plus vote" %>
+	<% end %>
+	<%= form_for([@suggestion, @suggestion.votes.build]) do |f| %>
+		<%= f.error_messages %>
+		<%= f.hidden_field(:value,:value => 0) %>
+		<%= f.submit "Cast a minus vote" %>
+	<% end %> 
+</p>
+
+
+<%= link_to 'Edit', edit_suggestion_path(@suggestion) %> |
+<%= link_to 'Back', suggestions_path %>

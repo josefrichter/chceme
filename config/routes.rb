@@ -1,6 +1,10 @@
 Chceme::Application.routes.draw do |map|
-  resources :documents
+  
 
+  resources :suggestions do
+    resources :votes
+  end
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -51,7 +55,7 @@ Chceme::Application.routes.draw do |map|
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   # root :to => "welcome#index"
-  root :to => "documents#index"
+  root :to => "suggestions#index"
 
   # See how all your routes lay out with "rake routes"
 
