@@ -1,0 +1,33 @@
+description:
+
+System for suggesting documents and their features. Originally thought for local legislation/regulations proposals. Example
+"- I want anti-noise regulation in my city (document)."
+"-- I want any noisy equipment (lawnmowers, chainsaws, etc.) to be banned from 18-09, Saturday afternoon and whole Sunday (feature)."
+"-- I want advertising cars with sound amplifiers be banned completely. (feature)"
+
+
+use cases:
+
+[core]
+- user comes to homepage, registers for the service
+- user logs in
+- user shall see list of documents (sorted by up-down votes)
+- user shall be able to vote up or down on each document, or cancel his vote
+- user shall be able to suggest a document
+- when user clicks a feature, he should see its content (description, etc.) and its features
+- user shall be able to vote up or down on each feature, or cancel his vote
+- user shall be able to suggest a feature
+
+[additional features]
+- user shall be able to comment on a document
+- user shall be able to comment on a feature
+- user shall be able to search a document or a feature
+- user shall see recommendations of other documents that might be interesting for him, based on his voting (people who voted + on the same documents/features as you did, also voted + on these documents/features)
+
+
+models:
+
+Users
+Documents (aka. proposals, suggestions, etc.)
+Features (individual points in the document)
+Comments
