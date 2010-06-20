@@ -16,7 +16,7 @@ gem "bson_ext", "1.0.1"
 # gem 'capistrano'
 
 # To use debugger
-# gem 'ruby-debug'
+gem 'ruby-debug'
 
 # Bundle the extra gems:
 # gem 'bj'

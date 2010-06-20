@@ -14,11 +14,11 @@
 	<b>Voting:</b>
 	<%= form_for([@suggestion, @suggestion.votes.build]) do |f| %>
 		<%= f.hidden_field(:value,:value => 1) %>
-		<%= f.submit "Cast a plus vote" %>
+		<%= f.submit "+" %>
 	<% end %>
 	<%= form_for([@suggestion, @suggestion.votes.build]) do |f| %>
 		<%= f.hidden_field(:value,:value => 0) %>
-		<%= f.submit "Cast a minus vote" %>
+		<%= f.submit "-" %>
 	<% end %> 
 </p>
 
@@ -26,7 +26,21 @@
 	<b>Features:</b>
 	<ul>
 		<% @suggestion.features.each do |feature| %>
-			<li><%= feature.body %> | <%= link_to "Edit", edit_suggestion_feature_path(@suggestion, feature) %> | <%= link_to "Delete", suggestion_feature_path(@suggestion,feature), :confirm => 'Are you sure?', :method => :delete %></li>
+			<li>
+				<%= feature.body %>
+				+<%= feature.votes.find_all{|vote| vote.value == true}.count %>/-<%= feature.votes.find_all{|vote| vote.value == false}.count %>, rozdíl <%= feature.votes_difference %> 
+				
+				<%= form_for([@suggestion, feature, feature.votes.build]) do |f| %>
+					<%= f.hidden_field(:value,:value => 1) %>
+					<%= f.submit "+" %>
+				<% end %>
+				<%= form_for([@suggestion, feature, feature.votes.build]) do |f| %>
+					<%= f.hidden_field(:value,:value => 0) %>
+					<%= f.submit "-" %>
+				<% end %>
+				<%= link_to "Edit", edit_suggestion_feature_path(@suggestion, feature) %> | 
+				<%= link_to "Delete", suggestion_feature_path(@suggestion,feature), :confirm => 'Are you sure?', :method => :delete %>
+			</li>
 			<!-- TODO edit and delete for admin only -->
 		<% end %>
 	</ul>

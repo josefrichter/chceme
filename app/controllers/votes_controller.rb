@@ -41,9 +41,21 @@ class VotesController < ApplicationController
   # POST /votes.xml
   def create
     #suggestion = Suggestion.find(params[:suggestion_id])
-    suggestion = Suggestion.where(:slug => params[:suggestion_id]).first
-    @vote = Vote.new(params[:vote])
-    suggestion.votes << @vote
+    
+    # TODO make this polymorphic
+    #debugger
+    if params[:feature_id].nil? # casting vote on Feature or Suggestion?
+      # cast vote on Suggestion
+      suggestion = Suggestion.where(:slug => params[:suggestion_id]).first
+      @vote = Vote.new(params[:vote])
+      suggestion.votes << @vote
+    else
+      # cast vote on Feature
+      suggestion = Suggestion.where(:slug => params[:suggestion_id]).first
+      feature = suggestion.features.find(params[:feature_id])
+      @vote = Vote.new(params[:vote])
+      feature.votes << @vote
+    end
 
     respond_to do |format|
       if @vote.save
