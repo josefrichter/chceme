@@ -3,6 +3,9 @@ class SuggestionsController < ApplicationController
   # GET /suggestions.xml
   def index
     @suggestions = Suggestion.all
+    # this sorts suggestions by plus votes count
+    #@suggestions = @suggestions.sort_by{|suggestion| -suggestion.votes.find_all{|vote| vote.value == true}.count}
+    @suggestions = @suggestions.sort_by{|suggestion| -suggestion.votes_difference}
 
     respond_to do |format|
       format.html # index.html.erb

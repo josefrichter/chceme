@@ -40,7 +40,8 @@ class VotesController < ApplicationController
   # POST /votes
   # POST /votes.xml
   def create
-    suggestion = Suggestion.find(params[:suggestion_id])
+    #suggestion = Suggestion.find(params[:suggestion_id])
+    suggestion = Suggestion.where(:slug => params[:suggestion_id]).first
     @vote = Vote.new(params[:vote])
     suggestion.votes << @vote
 

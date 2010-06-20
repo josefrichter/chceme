@@ -6,6 +6,7 @@
     <th>Slug</th>
     <th>Body</th>
     <th>Votes</th>
+    <th>Cast</th>
     <th></th>
     <th></th>
     <th></th>
@@ -16,7 +17,17 @@
     <td><%= suggestion.title %></td>
     <td><%= suggestion.slug %></td>
     <td><%= suggestion.body %></td>
-		<td><%= suggestion.votes.count %></td>
+		<td>+<%= suggestion.votes.find_all{|vote| vote.value == true}.count %>/-<%= suggestion.votes.find_all{|vote| vote.value == false}.count %>, rozdíl <%= suggestion.votes_difference %></td>
+		<td>
+			<%= form_for([suggestion, suggestion.votes.build]) do |f| %>
+				<%= f.hidden_field(:value,:value => 1) %>
+				<%= f.submit "+" %>
+			<% end %>
+			<%= form_for([suggestion, suggestion.votes.build]) do |f| %>
+				<%= f.hidden_field(:value,:value => 0) %>
+				<%= f.submit "-" %>
+			<% end %>
+		</td>
     <td><%= link_to 'Show', suggestion %></td>
     <td><%= link_to 'Edit', edit_suggestion_path(suggestion) %></td>
     <td><%= link_to 'Destroy', suggestion, :confirm => 'Are you sure?', :method => :delete %></td>
