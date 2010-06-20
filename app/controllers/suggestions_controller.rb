@@ -13,7 +13,8 @@ class SuggestionsController < ApplicationController
   # GET /suggestions/1
   # GET /suggestions/1.xml
   def show
-    @suggestion = Suggestion.find(params[:id])
+    #@suggestion = Suggestion.find(params[:id])
+    @suggestion = Suggestion.where(:slug => params[:id]).first
 
     respond_to do |format|
       format.html # show.html.erb
@@ -34,7 +35,8 @@ class SuggestionsController < ApplicationController
 
   # GET /suggestions/1/edit
   def edit
-    @suggestion = Suggestion.find(params[:id])
+    #@suggestion = Suggestion.find(params[:id])
+    @suggestion = Suggestion.where(:slug => params[:id]).first
   end
 
   # POST /suggestions
@@ -56,7 +58,8 @@ class SuggestionsController < ApplicationController
   # PUT /suggestions/1
   # PUT /suggestions/1.xml
   def update
-    @suggestion = Suggestion.find(params[:id])
+    #@suggestion = Suggestion.find(params[:id])
+    @suggestion = Suggestion.where(:slug => params[:id]).first
 
     respond_to do |format|
       if @suggestion.update_attributes(params[:suggestion])
@@ -72,7 +75,8 @@ class SuggestionsController < ApplicationController
   # DELETE /suggestions/1
   # DELETE /suggestions/1.xml
   def destroy
-    @suggestion = Suggestion.find(params[:id])
+    #@suggestion = Suggestion.find(params[:id])
+    @suggestion = Suggestion.where(:slug => params[:id]).first
     @suggestion.destroy
 
     respond_to do |format|

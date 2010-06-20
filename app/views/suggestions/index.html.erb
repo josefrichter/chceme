@@ -3,6 +3,7 @@
 <table>
   <tr>
     <th>Title</th>
+    <th>Slug</th>
     <th>Body</th>
     <th>Votes</th>
     <th></th>
@@ -13,6 +14,7 @@
 <% @suggestions.each do |suggestion| %>
   <tr>
     <td><%= suggestion.title %></td>
+    <td><%= suggestion.slug %></td>
     <td><%= suggestion.body %></td>
 		<td><%= suggestion.votes.count %></td>
     <td><%= link_to 'Show', suggestion %></td>
