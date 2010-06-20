@@ -4,6 +4,7 @@ class Suggestion
   field :body, :type => String
   field :slug, :type => String
   embeds_many :votes
+  embeds_many :features
   
   #index :votes_difference
   

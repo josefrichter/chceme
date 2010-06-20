@@ -11,16 +11,34 @@
 </p>
 
 <p>
+	<b>Voting:</b>
 	<%= form_for([@suggestion, @suggestion.votes.build]) do |f| %>
-		<%= f.error_messages %>
 		<%= f.hidden_field(:value,:value => 1) %>
 		<%= f.submit "Cast a plus vote" %>
 	<% end %>
 	<%= form_for([@suggestion, @suggestion.votes.build]) do |f| %>
-		<%= f.error_messages %>
 		<%= f.hidden_field(:value,:value => 0) %>
 		<%= f.submit "Cast a minus vote" %>
 	<% end %> 
+</p>
+
+<p>
+	<b>Features:</b>
+	<ul>
+		<% @suggestion.features.each do |feature| %>
+			<li><%= feature.body %> | <%= link_to "Edit", edit_suggestion_feature_path(@suggestion, feature) %> | <%= link_to "Delete", suggestion_feature_path(@suggestion,feature), :confirm => 'Are you sure?', :method => :delete %></li>
+			<!-- TODO edit and delete for admin only -->
+		<% end %>
+	</ul>
+</p>
+
+<p>
+	<b>Add a feature:</b>
+	<%= form_for([@suggestion, @suggestion.features.build]) do |f| %>
+		<%= f.label :body %>
+		<%= f.text_area :body %>
+		<%= f.submit "Add a feature" %>
+	<% end %>
 </p>
 
 

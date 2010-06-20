@@ -1,8 +1,8 @@
 Chceme::Application.routes.draw do |map|
-  
 
   resources :suggestions do
     resources :votes
+    resources :features
   end
   
   # The priority is based upon order of creation:

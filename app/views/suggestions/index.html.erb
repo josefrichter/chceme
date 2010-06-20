@@ -7,6 +7,7 @@
     <th>Body</th>
     <th>Votes</th>
     <th>Cast</th>
+    <th>Features</th>
     <th></th>
     <th></th>
     <th></th>
@@ -28,6 +29,7 @@
 				<%= f.submit "-" %>
 			<% end %>
 		</td>
+		<td><%= suggestion.features.count %></td>
     <td><%= link_to 'Show', suggestion %></td>
     <td><%= link_to 'Edit', edit_suggestion_path(suggestion) %></td>
     <td><%= link_to 'Destroy', suggestion, :confirm => 'Are you sure?', :method => :delete %></td>
