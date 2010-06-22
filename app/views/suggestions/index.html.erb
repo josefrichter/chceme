@@ -23,7 +23,7 @@
 		</div><!-- .voting -->
 	
 		<div class="body">
-			<h3><%= suggestion.title %></h3>
+			<h3><%= link_to suggestion.title, suggestion %></h3>
 			<p><%= suggestion.body %></p>
 			<p><%= link_to 'Show whole document', suggestion %></p>
 			<p><%= link_to 'Edit', edit_suggestion_path(suggestion) %> | <%= link_to 'Delete', suggestion, :confirm => 'Are you sure?', :method => :delete %></p>

@@ -1,5 +1,7 @@
 class Suggestion
   include Mongoid::Document
+  include ActiveModel::Validations
+  
   field :title, :type => String
   field :body, :type => String
   field :slug, :type => String
@@ -7,11 +9,13 @@ class Suggestion
   embeds_many :features
   
   #index :votes_difference
+  #attr_accessor :slug
   
   validates_presence_of :title, :body
   validates_uniqueness_of :title, :slug
   
-  before_create :generate_slug
+  #before_create :generate_slug
+  #before_validation :generate_slug, :on => :create
   
   def votes_difference # virtual attribute, calculated dynamically
     # find_all is a ruby method to filter array
@@ -25,6 +29,6 @@ class Suggestion
 
   private
   def generate_slug
-    self.slug = title.parameterize # TODO validate uniqueness
+    self.slug = title.parameterize unless title.nil? # TODO validate uniqueness
   end
 end

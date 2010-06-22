@@ -48,6 +48,19 @@ class SuggestionsController < ApplicationController
   # POST /suggestions.xml
   def create
     @suggestion = Suggestion.new(params[:suggestion])
+    
+    # create slug - TODO move somewhere
+    @suggestion.slug = params[:suggestion][:title].parameterize
+    # adjust slug if not unique
+    i=3
+    while !@suggestion.valid? && @suggestion.errors["slug"].include?("is already taken")
+      if @suggestion.slug[/-\d+$/].nil? # does the slug contain "-123" at the end?
+        @suggestion.slug<<"-2" # if not, assuming it's first duplicate and add "-2"
+      else
+        @suggestion.slug.gsub!(/-\d+$/,"-"+i.to_s) # replace "-2" with "-3" etc..
+        i+=1
+      end
+    end
 
     respond_to do |format|
       if @suggestion.save
@@ -89,4 +102,5 @@ class SuggestionsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
 end
