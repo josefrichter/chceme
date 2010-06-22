@@ -1,59 +1,71 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Title:</b>
-  <%= @suggestion.title %>
-</p>
-
-<p>
-  <b>Body:</b>
-  <%= @suggestion.body %>
-</p>
-
-<p>
-	<b>Voting:</b>
-	<%= form_for([@suggestion, @suggestion.votes.build]) do |f| %>
-		<%= f.hidden_field(:value,:value => 1) %>
-		<%= f.submit "+" %>
-	<% end %>
-	<%= form_for([@suggestion, @suggestion.votes.build]) do |f| %>
-		<%= f.hidden_field(:value,:value => 0) %>
-		<%= f.submit "-" %>
-	<% end %> 
-</p>
-
-<p>
-	<b>Features:</b>
-	<ul>
-		<% @suggestion.features.each do |feature| %>
-			<li>
-				<%= feature.body %>
-				+<%= feature.votes.find_all{|vote| vote.value == true}.count %>/-<%= feature.votes.find_all{|vote| vote.value == false}.count %>, rozdíl <%= feature.votes_difference %> 
-				
-				<%= form_for([@suggestion, feature, feature.votes.build]) do |f| %>
-					<%= f.hidden_field(:value,:value => 1) %>
-					<%= f.submit "+" %>
-				<% end %>
-				<%= form_for([@suggestion, feature, feature.votes.build]) do |f| %>
-					<%= f.hidden_field(:value,:value => 0) %>
-					<%= f.submit "-" %>
-				<% end %>
-				<%= link_to "Edit", edit_suggestion_feature_path(@suggestion, feature) %> | 
-				<%= link_to "Delete", suggestion_feature_path(@suggestion,feature), :confirm => 'Are you sure?', :method => :delete %>
-			</li>
-			<!-- TODO edit and delete for admin only -->
+<div class="suggestion">
+	
+	<div class="voting">
+		<h3>
+			<span class="plus_votes">+<%= @suggestion.votes.find_all{|vote| vote.value == true}.count %></span> / 
+			<span class="minus_votes">-<%= @suggestion.votes.find_all{|vote| vote.value == false}.count %></span>
+		</h3>
+		your vote?
+		<%= form_for([@suggestion, @suggestion.votes.build]) do |f| %>
+			<%= f.hidden_field(:value,:value => 1) %>
+			<%#= f.submit "+" %>
+			<button><%= image_tag("plus.png") %> agree</button>
 		<% end %>
-	</ul>
-</p>
+		<%= form_for([@suggestion, @suggestion.votes.build]) do |f| %>
+			<%= f.hidden_field(:value,:value => 0) %>
+			<%#= f.submit "-" %>
+			<button><%= image_tag("minus.png") %> disagree</button>
+		<% end %>
+	</div><!-- .voting -->          
+	
+	<div class="body">
+		<h3><%= @suggestion.title %></h3>
+		<p><%= @suggestion.body %></p>
+		
+		
+			<h4>Features</h4>
+			<% @features.each do |feature| %>
+				<div class="feature">
+					<div class="voting">
+						<span class="plus_votes">+<%= feature.votes.find_all{|vote| vote.value == true}.count %></span> / 
+						<span class="minus_votes">-<%= feature.votes.find_all{|vote| vote.value == false}.count %></span> 
 
-<p>
-	<b>Add a feature:</b>
-	<%= form_for([@suggestion, @suggestion.features.build]) do |f| %>
-		<%= f.label :body %>
-		<%= f.text_area :body %>
-		<%= f.submit "Add a feature" %>
-	<% end %>
-</p>
+						<%= form_for([@suggestion, feature, feature.votes.build]) do |f| %>
+							<%= f.hidden_field(:value,:value => 1) %>
+							<%#= f.submit "+" %>
+							<button><%= image_tag("plus.png") %> agree</button>
+						<% end %>
+						<%= form_for([@suggestion, feature, feature.votes.build]) do |f| %>
+							<%= f.hidden_field(:value,:value => 0) %>
+							<%#= f.submit "-" %>
+							<button><%= image_tag("minus.png") %> disagree</button>
+						<% end %>
+					</div><!-- .voting -->
+					<div class="body">
+						<%= feature.body %>
+					</div><!-- .body -->
+					
+						<%= link_to "Edit", edit_suggestion_feature_path(@suggestion, feature) %> | 
+						<%= link_to "Delete", suggestion_feature_path(@suggestion,feature), :confirm => 'Are you sure?', :method => :delete %>
+					<!-- TODO edit and delete for admin only -->
+				</div><!-- .feature -->
+			<% end %>
+      
+			<hr class="cleaner" />
+
+			<h4>Add a feature</h4>
+			<%= form_for([@suggestion, @suggestion.features.build]) do |f| %>
+				<%= f.text_area :body %><br />
+				<%= f.submit "Add a feature" %>
+			<% end %>
+		
+	</div><!-- .body -->
+	
+</div><!-- .suggestion -->
+
+<hr class="cleaner" />
 
 
 <%= link_to 'Edit', edit_suggestion_path(@suggestion) %> |

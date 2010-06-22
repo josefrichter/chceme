@@ -1,42 +1,39 @@
-<h1>Listing documents</h1>
+<h1>Listing suggestions</h1>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Slug</th>
-    <th>Body</th>
-    <th>Votes</th>
-    <th>Cast</th>
-    <th>Features</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
+  
 <% @suggestions.each do |suggestion| %>
-  <tr>
-    <td><%= suggestion.title %></td>
-    <td><%= suggestion.slug %></td>
-    <td><%= suggestion.body %></td>
-		<td>+<%= suggestion.votes.find_all{|vote| vote.value == true}.count %>/-<%= suggestion.votes.find_all{|vote| vote.value == false}.count %>, rozdíl <%= suggestion.votes_difference %></td>
-		<td>
+	<div class="suggestion">
+	
+		<div class="voting">
+			<h3>
+				<span class="plus_votes">+<%= suggestion.votes.find_all{|vote| vote.value == true}.count %></span> / 
+				<span class="minus_votes">-<%= suggestion.votes.find_all{|vote| vote.value == false}.count %></span>
+			</h3>
+			your vote?
 			<%= form_for([suggestion, suggestion.votes.build]) do |f| %>
 				<%= f.hidden_field(:value,:value => 1) %>
-				<%= f.submit "+" %>
+				<%#= f.submit "+" %>
+				<button><%= image_tag("plus.png") %> agree</button>
 			<% end %>
 			<%= form_for([suggestion, suggestion.votes.build]) do |f| %>
 				<%= f.hidden_field(:value,:value => 0) %>
-				<%= f.submit "-" %>
+				<%#= f.submit "-" %>
+				<button><%= image_tag("minus.png") %> disagree</button>
 			<% end %>
-		</td>
-		<td><%= suggestion.features.count %></td>
-    <td><%= link_to 'Show', suggestion %></td>
-    <td><%= link_to 'Edit', edit_suggestion_path(suggestion) %></td>
-    <td><%= link_to 'Destroy', suggestion, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+		</div><!-- .voting -->
+	
+		<div class="body">
+			<h3><%= suggestion.title %></h3>
+			<p><%= suggestion.body %></p>
+			<p><%= link_to 'Show whole document', suggestion %></p>
+			<p><%= link_to 'Edit', edit_suggestion_path(suggestion) %> | <%= link_to 'Delete', suggestion, :confirm => 'Are you sure?', :method => :delete %></p>
+		</div><!-- .body -->
+  
+		<hr class="cleaner" />
+	</div><!-- .suggestion --> 
 
-<br />
+<% end %>
+                           
+<hr class="cleaner" />
 
 <%= link_to 'New suggestion', new_suggestion_path %>

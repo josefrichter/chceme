@@ -5,6 +5,7 @@ class SuggestionsController < ApplicationController
     @suggestions = Suggestion.all
     # this sorts suggestions by plus votes count
     #@suggestions = @suggestions.sort_by{|suggestion| -suggestion.votes.find_all{|vote| vote.value == true}.count}
+    # this sorts suggestions by +/- votes difference
     @suggestions = @suggestions.sort_by{|suggestion| -suggestion.votes_difference}
 
     respond_to do |format|
@@ -18,6 +19,7 @@ class SuggestionsController < ApplicationController
   def show
     #@suggestion = Suggestion.find(params[:id])
     @suggestion = Suggestion.where(:slug => params[:id]).first
+    @features = @suggestion.features.sort_by{|feature| -feature.votes_difference}
 
     respond_to do |format|
       format.html # show.html.erb

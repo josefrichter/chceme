@@ -59,7 +59,7 @@ class VotesController < ApplicationController
 
     respond_to do |format|
       if @vote.save
-        format.html { redirect_to(suggestion, :notice => 'Vote was successfully created.') }
+        format.html { redirect_to(suggestion, :notice => 'Vote was successfully cast.') }
         format.xml  { render :xml => suggestion, :status => :created, :location => @vote }
       else
         format.html { render :action => "new" }
