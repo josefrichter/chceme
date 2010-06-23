@@ -8,6 +8,7 @@ gem 'rails', '3.0.0.beta4'
 #gem 'sqlite3-ruby', :require => 'sqlite3'
 gem "mongoid", "2.0.0.beta7"
 gem "bson_ext", "1.0.1"
+gem 'mongo_session_store', :git => 'git://github.com/nmerouze/mongo_session_store'
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -29,3 +30,13 @@ gem 'ruby-debug'
 # group :test do
 #   gem 'webrat'
 # end
+
+group :cucumber do
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'cucumber-rails'
+  gem 'cucumber'
+  gem 'rspec-rails', '>=2.0.0.beta.12'
+  gem 'spork'
+  gem 'launchy'
+end
