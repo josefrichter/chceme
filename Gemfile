@@ -39,4 +39,7 @@ group :cucumber do
   gem 'rspec-rails', '>=2.0.0.beta.12'
   gem 'spork'
   gem 'launchy'
+  gem 'pickle', :git => 'git://github.com/codegram/pickle'
+  gem 'machinist_mongo'
+  gem 'faker'
 end

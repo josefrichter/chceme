@@ -1,11 +1,13 @@
 class Suggestion
   include Mongoid::Document
-  include ActiveModel::Validations
+  #include ActiveModel::Validations
   
   field :title, :type => String
   field :body, :type => String
   field :slug, :type => String
-  embeds_many :votes
+  
+  embeds_many :votes # TODO should use has_many_related for votes. changes to controllers needed then
+  #has_many_related :votes
   embeds_many :features
   
   #index :votes_difference

@@ -5,6 +5,11 @@ Feature: Browse Suggestions
 	
 	Scenario: List Suggestions
   	Given I am on the homepage
-		#When I go to the homepage
 		Then I should see "Listing suggestions"
 		And I should see "New suggestion"
+		
+	Scenario: Add blank suggestion
+		Given I am on the homepage
+		When I follow "New suggestion"
+		And I press "Create Suggestion"
+		Then I should see "2 errors prohibited this document from being saved:"

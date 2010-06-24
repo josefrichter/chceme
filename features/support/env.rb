@@ -53,14 +53,23 @@ ActionController::Base.allow_rescue = false
 
 # How to clean your database when transactions are turned off. See
 # http://github.com/bmabey/database_cleaner for more info.
-if defined?(ActiveRecord::Base)
-  begin
-    require 'database_cleaner'
-    DatabaseCleaner.strategy = :truncation
-  rescue LoadError => ignore_if_database_cleaner_not_present
-  end
-end
+
+#if defined?(ActiveRecord::Base)
+#  begin
+#    require 'database_cleaner'
+#    require 'database_cleaner/cucumber'
+#    DatabaseCleaner.strategy = :truncation
+#    DatabaseCleaner.orm = 'data_mapper' 
+#  rescue LoadError => ignore_if_database_cleaner_not_present
+#    puts "Error on cleaner"
+#  end
+#end
 
 Before do
-  Mongoid.master.collections.each(&:drop)
+  #Mongoid.master.collections.each(&:drop)
+  #DatabaseCleaner.clean
+  Mongoid.master.collections.select { |c| c.name != 'system.indexes' }.each(&:drop) 
 end
+
+require "#{Rails.root}/spec/blueprints" # or wherever they live
+Before { Sham.reset } # reset Shams in between scenarios
