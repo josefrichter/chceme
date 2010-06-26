@@ -39,7 +39,8 @@ group :cucumber do
   gem 'rspec-rails', '>=2.0.0.beta.12'
   gem 'spork'
   gem 'launchy'
-  gem 'pickle', :git => 'git://github.com/codegram/pickle'
+  #gem 'pickle', :git => 'git://github.com/codegram/pickle'
+  gem 'pickle', '0.2.11' # need older version that should work with machinist_mongo
   gem 'machinist_mongo'
   gem 'faker'
 end

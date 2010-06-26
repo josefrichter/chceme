@@ -26,4 +26,4 @@ end
 require 'pickle/path/world'
 require 'pickle/email/world'
 
-#Pickle::Adapter.model_classes = [Suggestion] 
+#Pickle::Adapter.model_classes = [Suggestion,Feature,Vote] 

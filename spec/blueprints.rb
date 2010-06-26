@@ -8,9 +8,9 @@ Sham.define do
   body  { Faker::Lorem.paragraphs(3).join("\n\n") }
 end
 
-#Suggestion.blueprint do
-#  title  { Sham.title }
-#  body   { Sham.body }
+Suggestion.blueprint do
+  title  { Sham.title }
+  body   { Sham.body }
   #votes
   #features
-#end
+end

@@ -13,3 +13,8 @@ Feature: Browse Suggestions
 		When I follow "New suggestion"
 		And I press "Create Suggestion"
 		Then I should see "2 errors prohibited this document from being saved:"
+  
+	Scenario: Show suggestion on homepage
+		Given a suggestion exists with title: "My suggestion"
+		When I am on the homepage
+		Then I should see "My suggestion"
