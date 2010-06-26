@@ -47,9 +47,10 @@ class VotesController < ApplicationController
     if params[:feature_id].nil? # casting vote on Feature or Suggestion?
       # cast vote on Suggestion
       suggestion = Suggestion.where(:slug => params[:suggestion_id]).first
-      #@vote = Vote.new(params[:vote])
-      @vote = Vote.new(:value => params[:vote][:value],:suggestion_id => suggestion.id)
-      #suggestion.votes << @vote
+      params[:suggestion_id] = suggestion.id # replace slug with id
+      @vote = Vote.new(params[:vote])
+      #@vote = Vote.new(:value => params[:vote][:value],:suggestion_id => suggestion.id)
+      suggestion.votes << @vote
     else
       # cast vote on Feature
       suggestion = Suggestion.where(:slug => params[:suggestion_id]).first
