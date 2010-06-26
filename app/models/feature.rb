@@ -2,7 +2,8 @@ class Feature
   include Mongoid::Document
   field :body, :type => String
   embedded_in :suggestion, :inverse_of => :features
-  embeds_many :votes
+  #embeds_many :votes
+  has_many_related :votes, :as => :votable
   
   def votes_difference # virtual attribute, calculated dynamically
     # find_all is a ruby method to filter array

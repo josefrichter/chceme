@@ -23,6 +23,10 @@
 		</div><!-- .voting -->
 	
 		<div class="body">
+			
+			<%= debug suggestion %>
+			<%= debug suggestion.votes %>
+			
 			<h3><%= link_to suggestion.title, suggestion %></h3>
 			<p><%= suggestion.body %></p>
 			<p><%= link_to 'Show whole document', suggestion %></p>

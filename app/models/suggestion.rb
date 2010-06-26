@@ -6,8 +6,8 @@ class Suggestion
   field :body, :type => String
   field :slug, :type => String
   
-  embeds_many :votes # TODO should use has_many_related for votes. changes to controllers needed then
-  #has_many_related :votes
+  #embeds_many :votes # TODO should use has_many_related for votes. changes to controllers needed then
+  has_many_related :votes, :as => :votable
   embeds_many :features
   
   #index :votes_difference
