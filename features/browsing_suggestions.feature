@@ -15,6 +15,6 @@ Feature: Browse Suggestions
 		Then I should see "2 errors prohibited this document from being saved:"
   
 	Scenario: Show suggestion on homepage
-		Given a suggestion exists with title: "My suggestion"
+		Given a suggestion exists
 		When I am on the homepage
 		Then I should see "My suggestion"
