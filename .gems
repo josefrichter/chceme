@@ -2,4 +2,4 @@ rails -v 3.0.0
 bson --version '1.0.4'
 bson_ext --version '1.0.4'
 mongoid --version '2.0.0.beta.17'
-mongo_session_store --source 'git://github.com/nmerouze/mongo_session_store'
+jquery-rails
